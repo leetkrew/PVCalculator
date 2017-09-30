@@ -1,0 +1,11 @@
+d:\profile\documents\visual studio 2017\Projects\SolarPowerCalculator\SolarPowerCalculator\bin\Debug\SolarPowerCalculator.exe.config
+d:\profile\documents\visual studio 2017\Projects\SolarPowerCalculator\SolarPowerCalculator\bin\Debug\SolarPowerCalculator.exe
+d:\profile\documents\visual studio 2017\Projects\SolarPowerCalculator\SolarPowerCalculator\bin\Debug\SolarPowerCalculator.pdb
+d:\profile\documents\visual studio 2017\Projects\SolarPowerCalculator\SolarPowerCalculator\obj\Debug\SolarPowerCalculator.csprojResolveAssemblyReference.cache
+d:\profile\documents\visual studio 2017\Projects\SolarPowerCalculator\SolarPowerCalculator\obj\Debug\SolarPowerCalculator.Form1.resources
+d:\profile\documents\visual studio 2017\Projects\SolarPowerCalculator\SolarPowerCalculator\obj\Debug\SolarPowerCalculator.Properties.Resources.resources
+d:\profile\documents\visual studio 2017\Projects\SolarPowerCalculator\SolarPowerCalculator\obj\Debug\SolarPowerCalculator.csproj.GenerateResource.Cache
+d:\profile\documents\visual studio 2017\Projects\SolarPowerCalculator\SolarPowerCalculator\obj\Debug\SolarPowerCalculator.exe
+d:\profile\documents\visual studio 2017\Projects\SolarPowerCalculator\SolarPowerCalculator\obj\Debug\SolarPowerCalculator.pdb
+d:\profile\documents\visual studio 2017\Projects\SolarPowerCalculator\SolarPowerCalculator\bin\Debug\Newtonsoft.Json.dll
+d:\profile\documents\visual studio 2017\Projects\SolarPowerCalculator\SolarPowerCalculator\bin\Debug\Newtonsoft.Json.xml
