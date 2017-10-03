@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SolarPowerCalculator.Models;
 using Newtonsoft.Json;
 using System.IO;
+using System.Deployment.Application;
 
 namespace SolarPowerCalculator
 {
@@ -26,12 +27,16 @@ namespace SolarPowerCalculator
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                this.Text = string.Format("Solar Panel and Battery Requirement Calculator - v{0}", ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4));
+            }
+
             cboVoltage.Items.Add(12);
             cboVoltage.Items.Add(24);
             cboVoltage.Items.Add(36);
             cboVoltage.Items.Add(48);
             cboVoltage.SelectedIndex = 0;
-
 
             cboDOD.Items.Add("none");
             cboDOD.Items.Add("50%");
@@ -39,9 +44,7 @@ namespace SolarPowerCalculator
             cboDOD.SelectedIndex = 1;
 
             txtPVEfficiency.Text = "70";
-
-
-
+            
             for (int i = 0; i <= 24; i++)
             {
                 cboExposure.Items.Add(i);
@@ -51,45 +54,6 @@ namespace SolarPowerCalculator
 
             dtInput.DataSource = applianceList;
             dtOutput.DataSource = resultList;
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            var applianceItem = new loadsParams();
-
-            applianceItem.applianceName = txtApplianceName.Text;
-            applianceItem.hours = Convert.ToDecimal(txtHours.Text);
-            applianceItem.watts = Convert.ToDecimal(txtWattage.Text);
-            applianceItem.pieces = Convert.ToInt32(txtPcs.Text);
-            applianceList.Add(applianceItem);
-
-            dtInput.DataSource = null;
-            dtInput.DataSource = applianceList;
-
-            calculate();
-
-        }
-
-
-
-        private void cboVoltage_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            calculate();
-        }
-
-        private void cboDOD_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            calculate();
-        }
-
-        private void txtPVEfficiency_TextChanged(object sender, EventArgs e)
-        {
-            calculate();
-        }
-
-        private void cboExposure_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            calculate();
         }
 
         private void calculate()
@@ -181,12 +145,62 @@ namespace SolarPowerCalculator
             dtOutput.DataSource = resultList;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnOpen_Click_1(object sender, EventArgs e)
         {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Appliance List File (*.lst)|*.lst";
 
+            dialog.InitialDirectory = Properties.Settings.Default.lastDirectory;
+
+            dialog.Title = "Please select a List File";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string text = System.IO.File.ReadAllText(dialog.FileName);
+
+                    var dataObj = new outputFile();
+                    dataObj = JsonConvert.DeserializeObject<outputFile>(text);
+
+                    applianceList = dataObj.loads;
+                    cboDOD.SelectedIndex = dataObj.dod;
+                    cboExposure.SelectedIndex = dataObj.exposure;
+                    cboVoltage.SelectedIndex = dataObj.voltage;
+                    txtPVEfficiency.Text = dataObj.efficiency.ToString();
+
+
+                    dtInput.DataSource = null;
+                    dtInput.DataSource = applianceList;
+
+                    Properties.Settings.Default.lastDirectory = Path.GetFullPath(dialog.FileName);
+                    Properties.Settings.Default.Save();
+
+                    calculate();
+                }
+                catch (Exception ex)
+                {
+                    string alert = "";
+                    if (ex.InnerException != null)
+                    {
+                        alert = ex.InnerException.Message;
+                    }
+                    else
+                    {
+                        alert = ex.Message;
+                    }
+
+                    MessageBox.Show(alert, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+
+            }
+        }
+
+        private void btnSave_Click_1(object sender, EventArgs e)
+        {
             var dataObj = new outputFile();
             dataObj.loads = applianceList;
-            dataObj.efficiency =  Convert.ToDecimal(txtPVEfficiency.Text);
+            dataObj.efficiency = Convert.ToDecimal(txtPVEfficiency.Text);
             dataObj.dod = cboDOD.SelectedIndex;
             dataObj.exposure = cboExposure.SelectedIndex;
             dataObj.voltage = cboVoltage.SelectedIndex;
@@ -202,43 +216,60 @@ namespace SolarPowerCalculator
                 outputFile.WriteLine(data);
                 outputFile.Close();
             }
-
-
         }
 
-        private void btnOpen_Click(object sender, EventArgs e)
+        private void btnAdd_Click_1(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Appliance List File (*.lst)|*.lst";
-
-            dialog.InitialDirectory = Properties.Settings.Default.lastDirectory;
-
-            dialog.Title = "Please select a List File";
-            if (dialog.ShowDialog() == DialogResult.OK)
+            try
             {
+                var applianceItem = new loadsParams();
 
-                string text = System.IO.File.ReadAllText(dialog.FileName);
-
-                var dataObj = new outputFile();
-                dataObj = JsonConvert.DeserializeObject<outputFile>(text);
-
-                applianceList = dataObj.loads;
-                cboDOD.SelectedIndex = dataObj.dod;
-                cboExposure.SelectedIndex = dataObj.exposure;
-                cboVoltage.SelectedIndex = dataObj.voltage;
-                txtPVEfficiency.Text = dataObj.efficiency.ToString();
-
+                applianceItem.applianceName = txtApplianceName.Text;
+                applianceItem.hours = Convert.ToDecimal(txtHours.Text);
+                applianceItem.watts = Convert.ToDecimal(txtWattage.Text);
+                applianceItem.pieces = Convert.ToInt32(txtPcs.Text);
+                applianceList.Add(applianceItem);
 
                 dtInput.DataSource = null;
                 dtInput.DataSource = applianceList;
 
-                Properties.Settings.Default.lastDirectory = Path.GetFullPath(dialog.FileName);
-                Properties.Settings.Default.Save();
-
                 calculate();
-                
-                
             }
+            catch (Exception ex)
+            {
+                string alert = "";
+                if (ex.InnerException != null)
+                {
+                    alert = ex.InnerException.Message;
+                }
+                else
+                {
+                    alert = ex.Message;
+                }
+
+                MessageBox.Show(alert, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+
+        private void cboExposure_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            calculate();
+        }
+
+        private void txtPVEfficiency_TextChanged_1(object sender, EventArgs e)
+        {
+            calculate();
+        }
+
+        private void cboDOD_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            calculate();
+        }
+
+        private void cboVoltage_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            calculate();
         }
     }
 }
