@@ -11,6 +11,7 @@ using SolarPowerCalculator.Models;
 using Newtonsoft.Json;
 using System.IO;
 using System.Deployment.Application;
+using System.Reflection;
 
 namespace SolarPowerCalculator
 {
@@ -58,6 +59,7 @@ namespace SolarPowerCalculator
 
         private void calculate()
         {
+            
             decimal totalWHr = 0;
             totalWHr = applianceList.Sum((x => x.hours * x.watts * x.pieces));
 
@@ -83,15 +85,19 @@ namespace SolarPowerCalculator
 
             for (int i = 0; i <= Enum.GetNames(typeof(outputKeys)).Length - 1; i++)
             {
-                tmp.key = Enum.GetName(typeof(outputKeys), i);
+                //tmp.key = Enum.GetName(typeof(outputKeys), i);
+
+                
 
                 if (i == (int)outputKeys.Total_WHr)
                 {
+                    tmp.key = getEnumDescription(outputKeys.Total_WHr);
                     tmp.value = totalWHr;
                 }
 
                 if (i == (int)outputKeys.Battery_AH)
                 {
+                    tmp.key = getEnumDescription(outputKeys.Battery_AH);
                     if ((cboDOD.Text == "none") || (cboDOD.Text == "100%"))
                     {
                         tmp.value = totalWHr / Convert.ToDecimal(cboVoltage.Text);
@@ -100,12 +106,14 @@ namespace SolarPowerCalculator
                     {
                         tmp.value = (totalWHr / Convert.ToInt32(cboVoltage.Text)) * 2;
                     }
+                    
                 }
 
                 if (i == (int)outputKeys.PV_Watts_Required)
                 {
                     try
                     {
+                        tmp.key = getEnumDescription(outputKeys.PV_Watts_Required);
                         tmp.value = (totalWHr / (Convert.ToDecimal(txtPVEfficiency.Text) / 100)) / Convert.ToDecimal(cboExposure.Text);
                     }
                     catch
@@ -116,11 +124,13 @@ namespace SolarPowerCalculator
 
                 if (i == (int)outputKeys.Required_Wattage)
                 {
+                    tmp.key = getEnumDescription(outputKeys.Required_Wattage);
                     tmp.value = applianceList.Sum(x => x.watts);
                 }
 
                 if (i == (int)outputKeys.Safety_Margin)
                 {
+                    tmp.key = getEnumDescription(outputKeys.Safety_Margin);
                     tmp.value = applianceList.Sum(x => x.watts) * Convert.ToDecimal(2.5);
                 }
 
@@ -128,6 +138,7 @@ namespace SolarPowerCalculator
                 {
                     try
                     {
+                        tmp.key = getEnumDescription(outputKeys.Max_Current);
                         tmp.value = (totalWHr / (Convert.ToDecimal(txtPVEfficiency.Text) / 100)) / Convert.ToDecimal(cboExposure.Text) / Convert.ToDecimal(cboVoltage.Text);
                     }
                     catch
@@ -143,6 +154,25 @@ namespace SolarPowerCalculator
 
             dtOutput.DataSource = null;
             dtOutput.DataSource = resultList;
+            dtOutput.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dtOutput.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+        }
+
+        public static string getEnumDescription(Enum value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+
+            DescriptionAttribute[] attributes =
+                (DescriptionAttribute[])fi.GetCustomAttributes(
+                typeof(DescriptionAttribute),
+                false);
+
+            if (attributes != null &&
+                attributes.Length > 0)
+                return attributes[0].Description;
+            else
+                return value.ToString();
         }
 
         private void btnOpen_Click_1(object sender, EventArgs e)
