@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.dtInput = new System.Windows.Forms.DataGridView();
             this.txtPcs = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
@@ -38,20 +42,16 @@
             this.txtWattage = new System.Windows.Forms.TextBox();
             this.txtApplianceName = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.cboExposure = new System.Windows.Forms.ComboBox();
             this.txtPVEfficiency = new System.Windows.Forms.TextBox();
             this.cboDOD = new System.Windows.Forms.ComboBox();
             this.cboVoltage = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dtOutput = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtInput)).BeginInit();
@@ -80,12 +80,60 @@
             this.panel1.Size = new System.Drawing.Size(644, 432);
             this.panel1.TabIndex = 13;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(246, 4);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 17);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Hours";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(179, 4);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 17);
+            this.label3.TabIndex = 24;
+            this.label3.Text = "Wattage";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(72, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 17);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Appliance";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 17);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Pcs";
+            // 
             // dtInput
             // 
+            this.dtInput.AutoGenerateColumns = true;
+            this.dtInput.AllowUserToAddRows = false;
+            this.dtInput.AllowUserToDeleteRows = false;
+            this.dtInput.AllowUserToResizeColumns = false;
+            this.dtInput.AllowUserToResizeRows = false;
             this.dtInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtInput.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dtInput.Location = new System.Drawing.Point(21, 54);
             this.dtInput.Name = "dtInput";
+            this.dtInput.ReadOnly = true;
             this.dtInput.RowTemplate.Height = 24;
+            this.dtInput.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtInput.ShowCellErrors = false;
+            this.dtInput.ShowCellToolTips = false;
+            this.dtInput.ShowEditingIcon = false;
+            this.dtInput.ShowRowErrors = false;
             this.dtInput.Size = new System.Drawing.Size(609, 358);
             this.dtInput.TabIndex = 21;
             this.dtInput.TabStop = false;
@@ -164,6 +212,42 @@
             this.panel2.Size = new System.Drawing.Size(493, 61);
             this.panel2.TabIndex = 14;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(360, 4);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(96, 17);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Sun Exposure";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(254, 4);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(102, 17);
+            this.label7.TabIndex = 25;
+            this.label7.Text = "Efficiency Rate";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(127, 4);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(130, 17);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Depth of Discharge";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 4);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(56, 17);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Voltage";
+            // 
             // cboExposure
             // 
             this.cboExposure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -224,86 +308,14 @@
             this.dtOutput.TabIndex = 6;
             this.dtOutput.TabStop = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 17);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Pcs";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(72, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 17);
-            this.label2.TabIndex = 23;
-            this.label2.Text = "Appliance";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(179, 4);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 17);
-            this.label3.TabIndex = 24;
-            this.label3.Text = "Wattage";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(246, 4);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 17);
-            this.label4.TabIndex = 25;
-            this.label4.Text = "Hours";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 4);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 17);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "Voltage";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(360, 4);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(96, 17);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "Sun Exposure";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(254, 4);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(102, 17);
-            this.label7.TabIndex = 25;
-            this.label7.Text = "Efficiency Rate";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(127, 4);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(130, 17);
-            this.label5.TabIndex = 24;
-            this.label5.Text = "Depth of Discharge";
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(827, 425);
+            this.label9.Location = new System.Drawing.Point(947, 427);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(349, 17);
+            this.label9.Size = new System.Drawing.Size(229, 17);
             this.label9.TabIndex = 16;
-            this.label9.Text = "RJ Regalado (63 917 833 5770 / www.rjregalado.com)";
+            this.label9.Text = "RJ Regalado (www.rjregalado.com)";
             // 
             // Form1
             // 
@@ -314,6 +326,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Solar Panel and Battery Requirement Calculator";
             this.Load += new System.EventHandler(this.Form1_Load);

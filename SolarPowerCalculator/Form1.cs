@@ -53,7 +53,10 @@ namespace SolarPowerCalculator
 
             cboExposure.SelectedIndex = 6;
 
-            dtInput.DataSource = applianceList;
+            if (applianceList.Count() > 0)
+            {
+                dtInput.DataSource = applianceList;
+            }
             dtOutput.DataSource = resultList;
         }
 
@@ -85,10 +88,6 @@ namespace SolarPowerCalculator
 
             for (int i = 0; i <= Enum.GetNames(typeof(outputKeys)).Length - 1; i++)
             {
-                //tmp.key = Enum.GetName(typeof(outputKeys), i);
-
-                
-
                 if (i == (int)outputKeys.Total_WHr)
                 {
                     tmp.key = getEnumDescription(outputKeys.Total_WHr);
@@ -106,7 +105,6 @@ namespace SolarPowerCalculator
                     {
                         tmp.value = (totalWHr / Convert.ToInt32(cboVoltage.Text)) * 2;
                     }
-                    
                 }
 
                 if (i == (int)outputKeys.PV_Watts_Required)
@@ -301,5 +299,7 @@ namespace SolarPowerCalculator
         {
             calculate();
         }
+
+        
     }
 }
