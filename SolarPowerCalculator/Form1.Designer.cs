@@ -118,7 +118,6 @@
             // 
             // dtInput
             // 
-            this.dtInput.AutoGenerateColumns = true;
             this.dtInput.AllowUserToAddRows = false;
             this.dtInput.AllowUserToDeleteRows = false;
             this.dtInput.AllowUserToResizeColumns = false;
@@ -328,6 +327,7 @@
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Solar Panel and Battery Requirement Calculator";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
