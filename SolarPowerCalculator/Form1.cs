@@ -15,6 +15,7 @@ using System.Reflection;
 
 namespace SolarPowerCalculator
 {
+
     public partial class Form1 : Form
     {
         List<loadsParams> applianceList = new List<loadsParams>();
@@ -26,12 +27,19 @@ namespace SolarPowerCalculator
             InitializeComponent();
         }
 
+        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPage == tbGridTie)
+                e.Cancel = true;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             if (ApplicationDeployment.IsNetworkDeployed)
             {
                 this.Text = string.Format("Solar Panel and Battery Requirement Calculator - v{0}", ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4));
             }
+
 
             cboVoltage.Items.Add(12);
             cboVoltage.Items.Add(24);
@@ -173,7 +181,7 @@ namespace SolarPowerCalculator
                 return value.ToString();
         }
 
-        private void btnOpen_Click_1(object sender, EventArgs e)
+        private void btnOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Appliance List File (*.lst)|*.lst";
@@ -224,7 +232,7 @@ namespace SolarPowerCalculator
             }
         }
 
-        private void btnSave_Click_1(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             var dataObj = new outputFile();
             dataObj.loads = applianceList;
@@ -246,7 +254,7 @@ namespace SolarPowerCalculator
             }
         }
 
-        private void btnAdd_Click_1(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -280,22 +288,22 @@ namespace SolarPowerCalculator
             }
         }
 
-        private void cboExposure_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void cboExposure_SelectedIndexChanged(object sender, EventArgs e)
         {
             calculate();
         }
 
-        private void txtPVEfficiency_TextChanged_1(object sender, EventArgs e)
+        private void txtPVEfficiency_TextChanged(object sender, EventArgs e)
         {
             calculate();
         }
 
-        private void cboDOD_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void cboDOD_SelectedIndexChanged(object sender, EventArgs e)
         {
             calculate();
         }
 
-        private void cboVoltage_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void cboVoltage_SelectedIndexChanged(object sender, EventArgs e)
         {
             calculate();
         }
